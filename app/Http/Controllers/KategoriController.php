@@ -15,4 +15,35 @@ class KategoriController extends Controller
         // compact digunakan untuk mengirim data ke tampilan blade
         return view("kategori.index", compact("kategori"));
     }
+
+    public function store(Request $request)
+    {
+        // dd($request->all());
+        \App\Models\Kategori::create($request->all());
+        // kenapa namanya "kategori" ? karena "kategori" ini berasal dari web.php yang berfungsi untuk menentukan route pada sebuah web
+        return redirect("kategori");
+    }
+
+    public function edit($id)
+    {
+        $kategori = \App\Models\Kategori::find($id);
+        return view("kategori.edit", compact("kategori"));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $kategori = \App\Models\Kategori::find($id);
+        $kategori->kode = $request->kode;
+        $kategori->nama = $request->nama;
+        $kategori->update();
+
+        return redirect("kategori");
+    }
+
+    public function destroy($id)
+    {
+        $kategori = \App\Models\Kategori::find($id);
+        $kategori->delete();
+        return redirect("kategori");
+    }
 }

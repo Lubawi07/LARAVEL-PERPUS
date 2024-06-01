@@ -41,3 +41,12 @@ Route::get('/admin', function () {
 // );
 
 Route::get('/kategori', [KategoriController::class,'index']);
+Route::post('/kategori/store', [KategoriController::class,'store']);
+Route::get('/kategori/{id}/edit', [KategoriController::class,'edit']);
+Route::put('/kategori/{id}', [KategoriController::class,'update']);
+Route::get('/kategori/{id}', [KategoriController::class, 'destroy'] );
+
+
+Route::get('/buku', function () {
+    return view('buku.books');
+});
